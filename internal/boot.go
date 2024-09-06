@@ -48,10 +48,17 @@ func switchUtilities(client *redis.Client) (err error) {
 			log.Println("[DOHAN] <exit> OK!")
 		}
 	case "pipeline":
-		err = redis_utilities.TaskPipelined(client, string(os.Args[2]))
+		err = redis_utilities.PipelinedTask(client, string(os.Args[2]))
 		if err == nil {
 			log.Println("[DOHAN] <exit> OK!")
 		}
+
+	case "transaction":
+		err = redis_utilities.Transaction(client)
+		if err == nil {
+			log.Println("[DOHAN] <exit> OK!")
+		}
+
 	default:
 		log.Println("[DOHAN] <exit> Default case!")
 		ShowUsage()
